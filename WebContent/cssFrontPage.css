@@ -1,12 +1,11 @@
 @charset "ISO-8859-1";
 
 #div1 {
-	background-image: url("images/library2.jpg");
+	background-image: url("C:/Users/NipunGupta/eclipse-workspace2/LibraryManagement/WebContent/images/library2.jpg");
 	background-repeat: repeat-x;
 	height: 200px;
 	width: 100%;
 	/* background-size: 50%; */
-	
 }
 
 body {

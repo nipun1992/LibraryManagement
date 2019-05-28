@@ -3,14 +3,13 @@ package com.User;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +29,7 @@ public class CreateUser extends HttpServlet {
 	HttpSession session;
 
 	static {
-		System.out.println("**************Loading*****************");
+		System.out.println("**************Loading Create User*****************");
 	}
 
 	/**
@@ -39,7 +38,7 @@ public class CreateUser extends HttpServlet {
 	public CreateUser() {
 		super();
 		// TODO Auto-generated constructor stub
-		System.out.println("**************Construction*****************");
+		System.out.println("**************Construction Create User*****************");
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class CreateUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.init();
 
-		System.out.println("**************Initialisation*****************");
+		System.out.println("**************Initialisation Create User*****************");
 	}
 
 	/**
@@ -56,8 +55,6 @@ public class CreateUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		
 
 		if ((request.getParameter("fullname").length() == 0)) {
 			response.sendRedirect("CreateUser.jsp");
@@ -96,17 +93,21 @@ public class CreateUser extends HttpServlet {
 				ps.setInt(7, Integer.parseInt(request.getParameter("age")));
 				ps.setString(8, request.getParameter("num"));
 				ps.setString(9, request.getParameter("eml"));
-				ps.setString(11, request.getParameter("state"));
 
 				try {
 					FileInputStream fis = new FileInputStream(request.getParameter("im"));
 					ps.setBinaryStream(10, fis);
+
 				} catch (FileNotFoundException e) {
 					ps.setBinaryStream(10, null);
 				}
 
+				ps.setString(11, request.getParameter("state"));
+
 			} catch (SQLException e) {
 				e.printStackTrace();
+				
+				response.sendRedirect("");
 			}
 
 			int rows = 0;
@@ -121,6 +122,14 @@ public class CreateUser extends HttpServlet {
 				System.out.println("Successful");
 			} else {
 				System.out.println("Unsuccessful");
+
+				/*
+				 * PrintWriter out = response.getWriter();
+				 * 
+				 * out.println("");
+				 */
+
+				response.sendRedirect("");
 			}
 
 			if (ps != null) {
@@ -138,7 +147,7 @@ public class CreateUser extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
+
 			RequestDispatcher rd = request.getRequestDispatcher("BookIssue.jsp");
 			rd.forward(request, response);
 		}
@@ -148,7 +157,7 @@ public class CreateUser extends HttpServlet {
 	public void destroy() {
 		// TODO Auto-generated method stub
 		super.destroy();
-		System.out.println("**************Destruction*****************");
+		System.out.println("**************Destruction Create User*****************");
 	}
 
 }
