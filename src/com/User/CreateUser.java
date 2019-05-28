@@ -57,7 +57,7 @@ public class CreateUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd;
+		
 
 		if ((request.getParameter("fullname").length() == 0)) {
 			response.sendRedirect("CreateUser.jsp");
@@ -138,7 +138,9 @@ public class CreateUser extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-
+			
+			RequestDispatcher rd = request.getRequestDispatcher("BookIssue.jsp");
+			rd.forward(request, response);
 		}
 	}
 
