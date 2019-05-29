@@ -1,7 +1,6 @@
 package com.Librarian;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,19 +65,12 @@ public class AddBook extends HttpServlet {
 				ps.setString(3, request.getParameter("streams"));
 				ps.setString(4, request.getParameter("bookauthor"));
 
-				try {
-					FileInputStream fis = new FileInputStream(request.getParameter("bookfile"));
-					ps.setBinaryStream(5, fis);
+				FileInputStream fis = new FileInputStream(request.getParameter("bookfile"));
+				ps.setBinaryStream(5, fis);
 
-				} catch (FileNotFoundException e) {
-					ps.setBinaryStream(5, null);
-				}
-
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-
 			}
-
 			int rows = 0;
 
 			try {
@@ -98,6 +89,7 @@ public class AddBook extends HttpServlet {
 			if (ps != null) {
 				try {
 					ps.close();
+					ps = null;
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -106,15 +98,15 @@ public class AddBook extends HttpServlet {
 			if (con != null) {
 				try {
 					con.close();
+					con = null;
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 
-			/*
-			 * RequestDispatcher rd = request.getRequestDispatcher("BookIssue.jsp");
-			 * rd.forward(request, response);
-			 */
+			RequestDispatcher rd = request.getRequestDispatcher("LibrarianLogout.jsp");
+			rd.forward(request, response);
+
 		}
 	}
 

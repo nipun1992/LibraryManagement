@@ -8,13 +8,6 @@
 </head>
 <body>
 
-	<br>
-
-	<span style="width: 800; height: 100;">
-		<h2 style="color: red;">Please enter the details of Book to be
-			added to Library :</h2>
-	</span>
-
 
 	<span id="image"> <img alt="" src="images/Student.jpg"
 		height="250" align="top" border="4">
