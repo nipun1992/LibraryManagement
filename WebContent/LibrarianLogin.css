@@ -1,0 +1,30 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: silver;
+}
+#image
+{
+	width: 1300;
+	background-color: fuchsia;
+	width:1310
+}
+
+img
+{
+	border-color: red;
+	border-style: ridge;
+	border: medium;
+}
+
+h1
+{
+	color: red;
+	background-color: yellow;
+}
+
+form
+{
+	background-color: aqua;
+	color: navy;
+}

@@ -4,14 +4,23 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Add Book</title>
 </head>
 <body>
 
+	<center>
+		<div style="background-color: maroon;">
+			<font color="red"
+				style="font-family: cursive; font-size: xx-large; font-style: italic; font-weight: bolder; background-color: aqua;">Add
+				Book to the Library</font>
 
-	<span id="image"> <img alt="" src="images/Student.jpg"
-		height="250" align="top" border="4">
-	</span>
+		</div>
+
+		<span id="image" style="width: 1200; background-color: olive;">
+			<img alt="" src="images/Book.jpeg" height="250" align="top"
+			border="4">
+		</span>
+	</center>
 	<br>
 	<br>
 	<h4>Fields marked in asterisk are mandatory</h4>
@@ -49,8 +58,8 @@
 			<br>
 			<br>
 			<tr>
-			<br>
-			<br>
+				<br>
+				<br>
 			<tr>
 				Enter author :
 				<input type="text" name="bookauthor">

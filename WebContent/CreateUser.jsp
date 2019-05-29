@@ -5,7 +5,9 @@
 <title>New User</title>
 <link href="cssCreateUser.css" rel="stylesheet">
 
+
 <script src="UserValidation.js"></script>
+
 
 </head>
 <body>
@@ -18,8 +20,8 @@
 	</span>
 
 
-	<span id="image"> <img alt="" src="images/Student.jpg"
-		height="250" align="top" border="4">
+	<span id="image" style="width: 390;"> <img alt="" src="images/Student.jpg"
+		height="250" align="top" border="4" hspace="1000" vspace="10000">
 	</span>
 	<br>
 	<br>
