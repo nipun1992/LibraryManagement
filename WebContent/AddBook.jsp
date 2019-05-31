@@ -5,8 +5,35 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Book</title>
+
+<script type="text/javascript">
+
+function bookSubmission()
+{
+
+var name = NewBook.bookname.value;
+
+//document.write("<h1>Name of book is " + name + "</h1>");
+
+if(name.trim() == "")
+{
+	alert('Book name not provided');
+	return false;
+}
+
+var bkId = NewBook.bookid.value;
+
+if(bkId.trim() == "")
+{
+	alert('Book Id not provided');
+	return false;
+}
+
+}
+</script>
+
 </head>
-<body>
+<body bgcolor="green">
 
 	<center>
 		<div style="background-color: maroon;">
@@ -16,20 +43,23 @@
 
 		</div>
 
-		<span id="image" style="width: 1200; background-color: olive;">
+		<span id="image"
+			style="width: 1200; background-color: olive; background-repeat: round;">
 			<img alt="" src="images/Book.jpeg" height="250" align="top"
 			border="4">
 		</span>
 	</center>
 	<br>
 	<br>
-	<h4>Fields marked in asterisk are mandatory</h4>
+	<h4
+		style="color: purple; font-size: x-large; background-color: scrollbar;">Fields
+		marked in asterisk are mandatory</h4>
 
 	<br>
 	<br>
 
 	<form name="NewBook" action="addbook" method="post"
-		style="background-color: aqua; color: navy;">
+		style="background-color: aqua; color: navy;" onsubmit="return bookSubmission();">
 		<table>
 			<tr>
 				Enter Book Name* :
@@ -41,6 +71,7 @@
 				Enter Book Id* :
 				<input type="text" name="bookid">
 				<br>
+				(Book Id must have 4 characters)
 			</tr>
 			<br>
 			<br>

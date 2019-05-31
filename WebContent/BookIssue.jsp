@@ -10,10 +10,13 @@
 </head>
 <body bgcolor="lightgreen">
 
-	<center>
-		<font size="7" color="#4150f4"><b>Congratulations!!! Your
-				library account has been created</b></font>
-	</center>
+
+	<%-- <center>
+		<font size="7" color="#4150f4"><b><%=request.getAttribute("NoBook")%></b></font>
+	</center> --%>
+
+
+
 	<br>
 	<h1 style="color: red; size: 500px;">
 		<b>Please select the book you want to issue</b>
@@ -23,10 +26,11 @@
 	<br>
 	<br>
 
-	<form style="background-color: aqua; color: navy;">
+	<form action="issuebk" style="background-color: aqua; color: navy;">
 		Book : <input name="bookname" list="books">
 		<datalist id="books">
 			<option value="Quantum Computer">
+			<option value="SQL">
 		</datalist>
 		<br> <br> Click to check if the queried book is available or
 		not : <input type="submit" value="Check">

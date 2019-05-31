@@ -20,12 +20,28 @@
     <servlet-name>createLibrarian</servlet-name>
     <url-pattern>/Librarian</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>insertbook</servlet-name>
     <servlet-class>com.Librarian.AddBook</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>insertbook</servlet-name>
     <url-pattern>/addbook</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>existUser</servlet-name>
+    <servlet-class>com.User.ExistingUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>existUser</servlet-name>
+    <url-pattern>/exstusr</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>issuebook</servlet-name>
+    <servlet-class>com.User.BookIssue</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>issuebook</servlet-name>
+    <url-pattern>/issuebk</url-pattern>
   </servlet-mapping>
 </web-app>

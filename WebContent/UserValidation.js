@@ -87,7 +87,7 @@ function validate() {
 	if (mobile == "") {
 		alert('Enter Mobile number');
 		return false;
-	} else if (mobile.length < 10) {
+	} else if (mobile.length != 10) {
 		alert('Mobile number should have 10 digits');
 		return false;
 	}

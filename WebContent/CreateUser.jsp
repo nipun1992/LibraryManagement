@@ -3,10 +3,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>New User</title>
-<link href="cssCreateUser.css" rel="stylesheet">
-
+<link href="CSSFiles/cssCreateUser.css" rel="stylesheet">
 
 <script src="UserValidation.js"></script>
+
+<script type="text/javascript">
+
+var pht = document.getElementById("img1");
+
+document.write("<img src=" + pht.src + "");
+
+</script>
+
 
 
 </head>
@@ -20,8 +28,8 @@
 	</span>
 
 
-	<span id="image" style="width: 390;"> <img alt="" src="images/Student.jpg"
-		height="250" align="top" border="4" hspace="1000" vspace="10000">
+	<span id="image" style="width: 390;"> <img alt=""
+		src="images/Student.jpg" height="250" align="top" border="4">
 	</span>
 	<br>
 	<br>
@@ -30,19 +38,20 @@
 	<br>
 	<br>
 
-	<form name="NewUser" action="user" method="post" onsubmit="validate();"
-		style="background-color: aqua;color: navy;">
+	<form name="NewUser" action="user" method="post"
+		onsubmit="return validate();"
+		style="background-color: aqua; color: navy;">
 		<table>
 			<tr>
 				Enter your Full Name* :
-				<input type="text" name="fullname"
+				<input type="text" name="fullname" placeholder="Full Name"
 					value="<%request.getAttribute("fullname");%>">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Enter your UserId* :
-				<input type="text" name="userid"
+				<input type="text" name="userid" placeholder="User Id"
 					value="<%session.getAttribute("userid");%>">
 				<br> (UserId must have 4 characters with at least 1 upper case
 				character)
@@ -51,7 +60,7 @@
 			<br>
 			<tr>
 				Enter your Password* :
-				<input type="password" name="password">
+				<input type="password" name="password" placeholder="Password">
 				<br> (Password must have 4 characters with at least 1 upper
 				case)
 			</tr>
@@ -95,32 +104,32 @@
 			<br>
 			<tr>
 				Age* :
-				<input type="number" name="age">
+				<input type="number" name="age" placeholder="Age">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Mobile* :
-				<input type="number" name="num">
+				<input type="number" name="num" placeholder="Mobile no.">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Email* :
-				<input type="email" name="eml">
+				<input type="email" name="eml" placeholder="Email address">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Photo :
-				<input type="file" name="im">
+				<input id="img1"  type="file" name="im" placeholder="Photo" on>
 
 			</tr>
 			<br>
 			<br>
 			<tr>
 				State :
-				<input name="state" list="states">
+				<input name="state" list="states" placeholder="Where are you from?">
 				<datalist id="states">
 					<option value="Jammu and Kashmir">
 					<option value="Himachal Pradesh">

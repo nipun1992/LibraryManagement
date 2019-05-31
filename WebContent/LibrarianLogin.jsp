@@ -5,26 +5,49 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Librarian Login Page</title>
-<link href="LibrarianLogin.css" rel="stylesheet">
+<link href="CSSFiles/LibrarianLogin.css" rel="stylesheet">
+
+<script type="text/javascript">
+	function validateLibrarian() {
+
+		var libuser = Librarian.librarianid.value;
+
+		if (libuser != "College") {
+			alert("User id is wrong");
+			return false;
+		}
+
+		var paswrd = Librarian.librarianpassword.value;
+
+		if (paswrd != "Library") {
+			alert("Password is wrong");
+			return false;
+		}
+
+	}
+</script>
+
 </head>
 <body>
 
-	<span id="span1" style="height: 100;align-content: center;">
-		<font size="5" face="arial"><h1 align="center" style="">Welcome, Please enter credentials</h1></font>
+	<span id="span1" style="height: 100; align-content: center;"> <font
+		size="5" face="arial"><h1 align="center" style="">Welcome,
+				Please enter credentials</h1></font>
 	</span>
 
-	<span id="image" > <img src="images/Librarian.jpeg"
-		height="250" align="top" border="4" >
+	<span id="image"> <img src="images/Librarian.jpeg" height="250"
+		align="top" border="4">
 	</span>
 	<br>
 	<br>
-	
+
 
 	<br>
 	<br>
 
-	<form name="Librarian" action="Librarian">
-	<font size="5" color="navy"><h3>All Fields are mandatory</h3></font>
+	<form name="Librarian" action="Librarian"
+		onsubmit="return validateLibrarian();">
+		<font size="5" color="navy"><h3>All Fields are mandatory</h3></font>
 		<table>
 			<tr>
 				Enter Librarian Id :

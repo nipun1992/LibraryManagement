@@ -86,23 +86,13 @@ public class AddBook extends HttpServlet {
 
 			}
 
-			if (ps != null) {
-				try {
-					ps.close();
-					ps = null;
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (con != null) {
-				try {
-					con.close();
-					con = null;
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			/*
+			 * if (ps != null) { try { ps.close(); ps = null; } catch (SQLException e) {
+			 * e.printStackTrace(); } }
+			 * 
+			 * if (con != null) { try { con.close(); con = null; } catch (SQLException e) {
+			 * e.printStackTrace(); } }
+			 */
 
 			RequestDispatcher rd = request.getRequestDispatcher("LibrarianLogout.jsp");
 			rd.forward(request, response);
