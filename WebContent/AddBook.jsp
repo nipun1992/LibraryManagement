@@ -7,33 +7,37 @@
 <title>Add Book</title>
 
 <script type="text/javascript">
+	function bookSubmission() {
 
-function bookSubmission()
-{
+		var name = NewBook.bookname.value;
 
-var name = NewBook.bookname.value;
+		if (name.trim() == "") {
+			alert('Book name not provided');
+			return false;
+		}
 
-//document.write("<h1>Name of book is " + name + "</h1>");
+		var bkId = NewBook.bookid.value;
 
-if(name.trim() == "")
-{
-	alert('Book name not provided');
-	return false;
-}
+		if (bkId.length != 4) {
+			alert('Book Id must have 4 characters');
+			return false;
+		}
 
-var bkId = NewBook.bookid.value;
-
-if(bkId.trim() == "")
-{
-	alert('Book Id not provided');
-	return false;
-}
-
-}
+	}
 </script>
 
 </head>
 <body bgcolor="green">
+
+	<%
+		if (request.getAttribute("exists") != null) {
+	%>
+	<h1><%=request.getAttribute("exists")%></h1>
+
+	<%
+		request.setAttribute("exists", null);
+		}
+	%>
 
 	<center>
 		<div style="background-color: maroon;">
@@ -59,7 +63,8 @@ if(bkId.trim() == "")
 	<br>
 
 	<form name="NewBook" action="addbook" method="post"
-		style="background-color: aqua; color: navy;" onsubmit="return bookSubmission();">
+		style="background-color: aqua; color: navy;"
+		onsubmit="return bookSubmission();">
 		<table>
 			<tr>
 				Enter Book Name* :
@@ -70,8 +75,7 @@ if(bkId.trim() == "")
 			<tr>
 				Enter Book Id* :
 				<input type="text" name="bookid">
-				<br>
-				(Book Id must have 4 characters)
+				<br> (Book Id must have 4 characters)
 			</tr>
 			<br>
 			<br>

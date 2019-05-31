@@ -84,19 +84,19 @@ public class BookIssue extends HttpServlet {
 				is.close();
 				os.close();
 
+				request.setAttribute("NoBook", null);
+
 				rd = request.getRequestDispatcher("IssueSuccessful.jsp");
 				// rd.forward(request, response);
 
 			} else {
 				System.out.println("No such book");
 
-				// response.getWriter().print("File not found");
-
 				String noBookMessage = "No such book exists in the Library";
 
 				request.setAttribute("NoBook", noBookMessage);
 
-				rd = request.getRequestDispatcher("Existing.jsp");
+				rd = request.getRequestDispatcher("BookIssue.jsp");
 				rd.forward(request, response);
 
 			}

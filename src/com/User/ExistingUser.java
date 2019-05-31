@@ -60,25 +60,33 @@ public class ExistingUser extends HttpServlet {
 
 			if (rs.next()) {
 				System.out.println("User exists");
+
 				rd = request.getRequestDispatcher("BookIssue.jsp");
 				rd.forward(request, response);
 			} else {
 				System.out.println("User does not exist");
 
-				response.setContentType("text/html");
+				String userDoesNotExist = "Queried user does not exist in the Library system";
 
-				PrintWriter out = response.getWriter();
+				request.setAttribute("userExists", userDoesNotExist);
 
-				out.println("<html>");
-				out.println("<head></head>");
-				out.println("<body bgcolor=green></body>");
-				out.println("<font>Not a valid account</font>");
-				out.println("<br><br>");
-				out.println("What would like to do now?");
-				out.println("<font>Try again : <a href=ExistingUser.jsp>Try again</a></font>");
-				out.println("<br><br>");
-				out.println("<font>Try again : <a href=FrontPage.html>Logout</a></font>");
-				out.println("</body>");
+				rd = request.getRequestDispatcher("ExistingUser.jsp");
+				rd.forward(request, response);
+				
+				/*
+				 * response.setContentType("text/html");
+				 * 
+				 * PrintWriter out = response.getWriter();
+				 * 
+				 * out.println("<html>"); out.println("<head></head>");
+				 * out.println("<body bgcolor=green></body>");
+				 * out.println("<font>Not a valid account</font>"); out.println("<br><br>");
+				 * out.println("What would like to do now?");
+				 * out.println("<font>Try again : <a href=ExistingUser.jsp>Try again</a></font>"
+				 * ); out.println("<br><br>");
+				 * out.println("<font>Try again : <a href=FrontPage.html>Logout</a></font>");
+				 * out.println("</body>");
+				 */
 
 			}
 

@@ -7,14 +7,32 @@
 <title>Insert title here</title>
 </head>
 <body bgcolor="aqua">
-<center>
-	<h1
-		style="font-family: cursive; background-color: olive;align-content: center;">
-		<center><span>Hi there avid book reader!!! Back for another book</span></center></h1></center>
+
+	<%
+		if (request.getAttribute("userExists") != null) {
+	%>
+	<h1><%=request.getAttribute("userExists")%></h1>
+
+	<%
+		request.setAttribute("exists", null);
+		}
+	%>
+
+	<center>
+		<h1
+			style="font-family: cursive; background-color: olive; align-content: center;">
+			<center>
+				<span>Hi there avid book reader!!! Back for another book</span>
+			</center>
+		</h1>
+	</center>
 	<br>
 	<br>
 
-	<h3><font size="6" color="green">Let us first check if you have a valid account in the Library</font></h3>
+	<h3>
+		<font size="6" color="green">Let us first check if you have a
+			valid account in the Library</font>
+	</h3>
 
 	<form style="color: aqua; background-color: maroon;" action="exstusr">
 		<font size="6"> Enter you User Id* :</font> <input type="text"

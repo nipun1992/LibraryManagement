@@ -12,18 +12,17 @@
 		<font size="7" color="#4150f4"><b>Congratulations!!! Your
 				library account has been created</b></font>
 	</center>
-	
+
 	<h2>What would you like to do now?</h2>
-	
-	
-	<form action="">
-	
-	Logout : <a href="FrontPage.html">Logout</a>
-	
-	Issue Book : <a href="BookIssue.jsp">Logout</a>
-	</form>
-	
-	
+
+
+	If you wish to logout :
+	<a href="FrontPage.html"><button>Logout</button></a>
+	<br>
+	<br> If you wish to issue Book :
+	<a href="BookIssue.jsp"><button>Issue</button></a>
+
+
 
 </body>
 </html>

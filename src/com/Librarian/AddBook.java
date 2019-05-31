@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -42,19 +43,37 @@ public class AddBook extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		if ((request.getParameter("bookname").length() == 0)) {
-			response.sendRedirect("AddBook.jsp");
-		} else if (request.getParameter("bookid").length() < 4) {
-			response.sendRedirect("AddBook.jsp");
-		} else if (request.getParameter("streams").equals("----")) {
-			response.sendRedirect("AddBook.jsp");
-		} else if (request.getParameter("bookauthor").length() == 0) {
-			response.sendRedirect("AddBook.jsp");
-		} else {
+		RequestDispatcher rd;
 
-			String sql = "INSERT INTO LIBRARY_BOOK VALUES(?, ?, ?, ?, ?)";
+		String sql = "SELECT * FROM LIBRARY_BOOK WHERE BOOKNAME = '" + request.getParameter("bookname") + "'";
 
-			con = Jdbc.connect();
+		con = Jdbc.connect();
+
+		boolean fileAlreadyExists = false;
+
+		try {
+
+			ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+
+				String bookAlreadyExists = "The book already exists in Library. Please add another book";
+				request.setAttribute("exists", bookAlreadyExists);
+
+				fileAlreadyExists = true;
+
+				rd = request.getRequestDispatcher("AddBook.jsp");
+				rd.forward(request, response);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (fileAlreadyExists == false) {
+			sql = "INSERT INTO LIBRARY_BOOK VALUES(?, ?, ?, ?, ?)";
 
 			try {
 
@@ -86,6 +105,39 @@ public class AddBook extends HttpServlet {
 
 			}
 
+			rows = 0;
+
+			sql = "INSERT INTO LIBRARY_BOOK_STATUS VALUES(?, ?, ?, ?, ?)";
+
+			try {
+
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, request.getParameter("bookid"));
+				ps.setString(2, "Available");
+				ps.setString(3, null);
+				ps.setDate(4, null);
+				ps.setString(5, null);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			rows = 0;
+
+			try {
+				rows = ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			if (rows != 0) {
+				System.out.println("Successful");
+			} else {
+				System.out.println("Unsuccessful");
+
+			}
+
 			/*
 			 * if (ps != null) { try { ps.close(); ps = null; } catch (SQLException e) {
 			 * e.printStackTrace(); } }
@@ -94,7 +146,7 @@ public class AddBook extends HttpServlet {
 			 * e.printStackTrace(); } }
 			 */
 
-			RequestDispatcher rd = request.getRequestDispatcher("LibrarianLogout.jsp");
+			rd = request.getRequestDispatcher("LibrarianLogout.jsp");
 			rd.forward(request, response);
 
 		}

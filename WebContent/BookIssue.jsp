@@ -15,7 +15,15 @@
 		<font size="7" color="#4150f4"><b><%=request.getAttribute("NoBook")%></b></font>
 	</center> --%>
 
+	<%
+		if (request.getAttribute("NoBook") != null) {
+	%>
+	<h1><%=request.getAttribute("NoBook")%></h1>
 
+	<%
+		request.setAttribute("NoBook", null);
+		}
+	%>
 
 	<br>
 	<h1 style="color: red; size: 500px;">
@@ -27,13 +35,17 @@
 	<br>
 
 	<form action="issuebk" style="background-color: aqua; color: navy;">
-		Book : <input name="bookname" list="books">
+		<font size="6">Book Name :</font> <input name="bookname" list="books"
+			placeholder="Book Name">
 		<datalist id="books">
 			<option value="Quantum Computer">
 			<option value="SQL">
 		</datalist>
-		<br> <br> Click to check if the queried book is available or
-		not : <input type="submit" value="Check">
+		<br> <br> <font size="6">Click to check if the
+			queried book is available or not : </font>
+		<button type="submit" style="font-size: small;">Check</button>
+		<br> <br> <font size="6">Click to if you want to
+			logout </font><a href="FrontPage.html"><button style="font-size: small;">Logout</button></a>
 	</form>
 
 </body>

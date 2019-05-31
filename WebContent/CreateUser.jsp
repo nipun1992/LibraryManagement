@@ -84,8 +84,8 @@ document.write("<img src=" + pht.src + "");
 			<br>
 			<tr>
 				Enter your stream* :
-				<select name="branch">
-					<option>----</option>
+				<select name="branch" id="subject">
+					<option value="">----</option>
 					<option>Computer Science</option>
 					<option>Electronics and Communication</option>
 					<option>Mechanical</option>

@@ -62,9 +62,13 @@ function validate() {
 
 	}
 
-	var branch = NewUser.branch.selectedIndex;
+	// var branch = NewUser.branch.selectedIndex;
 
-	if (branch == "----") {
+	var branch = document.getElementById("subject").selectedIndex;
+
+	if (!(branch == "Computer Science"
+			|| branch == "Electronics and Communication"
+			|| branch == "Mechanical" || branch == "Electrical" || branch == "Civil")) {
 		alert('Select branch');
 		return false;
 	} else {
