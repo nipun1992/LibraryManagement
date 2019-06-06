@@ -153,7 +153,7 @@ public class AddBook extends HttpServlet {
 				ps.close();
 				ps = null;
 				(Jdbc.con).close();
-
+				
 				if ((Jdbc.con).isClosed()) {
 					System.out.println("connection closed");
 				} else

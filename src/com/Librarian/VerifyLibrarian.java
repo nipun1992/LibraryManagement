@@ -38,7 +38,9 @@ public class VerifyLibrarian extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("AddBook.jsp");
 			rd.forward(request, response);
 		} else {
-			response.sendRedirect("LibrarianLogin.jsp");
+			//response.sendRedirect("LibrarianLogin.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("LibrarianLogin.jsp");
+			rd.include(request, response);
 		}
 	}
 

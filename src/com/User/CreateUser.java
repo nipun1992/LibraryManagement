@@ -56,28 +56,9 @@ public class CreateUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*
-		 * if ((request.getParameter("fullname").length() == 0)) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("userid").length() < 4) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("password").length() < 4) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("sem") == null) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("branch").equals("----")) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("age").equals("")) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("r1") == null) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("num") == null) {
-		 * response.sendRedirect("CreateUser.jsp"); } else if
-		 * (request.getParameter("eml") == null) {
-		 * response.sendRedirect("CreateUser.jsp"); } else {
-		 */
-
 		String sql = "INSERT INTO LIBRARY_USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, null, 'Y')";
+
+		RequestDispatcher rd;
 
 		try {
 
@@ -90,9 +71,9 @@ public class CreateUser extends HttpServlet {
 			ps.setString(3, request.getParameter("fullname"));
 			ps.setInt(4, Integer.parseInt(request.getParameter("sem")));
 			ps.setString(5, request.getParameter("branch"));
-			
-			System.out.println("Hello" + request.getParameter("branch") + "Nice");
-			
+
+			// System.out.println("Hello" + request.getParameter("branch") + "Nice");
+
 			ps.setString(6, request.getParameter("r1"));
 			ps.setInt(7, Integer.parseInt(request.getParameter("age")));
 			ps.setString(8, request.getParameter("num"));
@@ -111,7 +92,16 @@ public class CreateUser extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-			response.sendRedirect("");
+			PrintWriter out = response.getWriter();
+
+			out.println("<html>");
+			out.println("<head></head>");
+			out.println("<body>");
+			out.println("Exception : " + e.getMessage() + "<br><br>");
+			out.println("</body>");
+
+			rd = request.getRequestDispatcher("CreateUser.jsp");
+			rd.include(request, response);
 		}
 
 		int rows = 0;
@@ -120,25 +110,55 @@ public class CreateUser extends HttpServlet {
 			rows = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			PrintWriter out = response.getWriter();
+
+			out.println("<html>");
+			out.println("<head></head>");
+			out.println("<body>");
+			out.println("Exception : " + e.getMessage() + "<br><br>");
+			out.println("</body>");
+
+			rd = request.getRequestDispatcher("CreateUser.jsp");
+			rd.include(request, response);
 		}
 
 		if (rows != 0) {
 			System.out.println("Successful");
+			rd = request.getRequestDispatcher("AccountCreated.jsp");
+			rd.forward(request, response);
 		} else {
 			System.out.println("Unsuccessful");
 
+			PrintWriter out = response.getWriter();
+
+			out.println("<html>");
+			out.println("<head></head>");
+			out.println("<body>");
+			out.println("<br><br>Unsuccessful<br><br>");
+			out.println("</body>");
+
+			rd = request.getRequestDispatcher("CreateUser.jsp");
+			rd.include(request, response);
+
 		}
 
-		/*
-		 * if (ps != null) { try { ps.close(); } catch (SQLException e) {
-		 * e.printStackTrace(); } }
-		 * 
-		 * if (con != null) { try { con.close(); } catch (SQLException e) {
-		 * e.printStackTrace(); } }
-		 */
+		try {
+			ps.close();
+			ps = null;
+			(Jdbc.con).close();
 
-		RequestDispatcher rd = request.getRequestDispatcher("AccountCreated.jsp");
-		rd.forward(request, response);
+			if ((Jdbc.con).isClosed()) {
+				System.out.println("connection closed");
+			} else
+				System.out.println("connection open");
+			Jdbc.closeConnection();
+
+			Jdbc.closeConnection();
+
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 

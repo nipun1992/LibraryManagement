@@ -36,9 +36,9 @@
 
 	<form style="color: aqua; background-color: maroon;" action="exstusr">
 		<font size="6"> Enter you User Id* :</font> <input type="text"
-			placeholder="User Id" name="id1"> <br> <br> <font
+			placeholder="User Id" name="id1" autocomplete="off"> <br> <br> <font
 			size="6">Enter you Name* :</font> <input type="text"
-			placeholder="Name" name="name1"> <br> <br> <font
+			placeholder="Name" name="name1" autocomplete="off"> <br> <br> <font
 			size="6">Enter you Password* :</font> <input type="password"
 			placeholder="User Id" name="paswrd1"> <br> <br> <font
 			size="6">Verify :</font> <input type="submit" placeholder="User Id"

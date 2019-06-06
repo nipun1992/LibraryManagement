@@ -3,8 +3,9 @@ package com.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,7 +53,7 @@ public class ExistingUser extends HttpServlet {
 
 			RequestDispatcher rd;
 
-			Statement st = (Jdbc.con).createStatement();
+			PreparedStatement st = (Jdbc.con).prepareStatement(sql);
 
 			ResultSet rs = st.executeQuery(sql);
 
@@ -62,33 +63,39 @@ public class ExistingUser extends HttpServlet {
 				rd = request.getRequestDispatcher("BookIssue.jsp");
 				rd.forward(request, response);
 			} else {
-				System.out.println("User does not exist");
 
-				String userDoesNotExist = "Queried user does not exist in the Library system";
+				PrintWriter out = response.getWriter();
 
-				request.setAttribute("userExists", userDoesNotExist);
+				out.println("<html>");
+				out.println("<head></head>");
+				out.println("<body>");
+				out.println("<h1>Queried user does not exist in the Library system</h1><br><br>");
+				out.println("</body>");
+				out.println("</html>");
 
 				rd = request.getRequestDispatcher("ExistingUser.jsp");
-				rd.forward(request, response);
-
-				/*
-				 * response.setContentType("text/html");
-				 * 
-				 * PrintWriter out = response.getWriter();
-				 * 
-				 * out.println("<html>"); out.println("<head></head>");
-				 * out.println("<body bgcolor=green></body>");
-				 * out.println("<font>Not a valid account</font>"); out.println("<br><br>");
-				 * out.println("What would like to do now?");
-				 * out.println("<font>Try again : <a href=ExistingUser.jsp>Try again</a></font>"
-				 * ); out.println("<br><br>");
-				 * out.println("<font>Try again : <a href=FrontPage.html>Logout</a></font>");
-				 * out.println("</body>");
-				 */
+				rd.include(request, response);
 
 			}
 
 		} catch (Exception e) {
+
+		} finally {
+
+			try {
+
+				(Jdbc.con).close();
+
+				if ((Jdbc.con).isClosed()) {
+					System.out.println("connection closed");
+				} else
+					System.out.println("connection open");
+				Jdbc.closeConnection();
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		}
 

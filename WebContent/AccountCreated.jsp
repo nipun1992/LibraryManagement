@@ -6,20 +6,21 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body bgcolor="green">
 
 	<center>
-		<font size="7" color="#4150f4"><b>Congratulations!!! Your
+		<font size="7" color="yellow"><b>Congratulations!!! Your
 				library account has been created</b></font>
 	</center>
 
-	<h2>What would you like to do now?</h2>
+	<h1><font color="red">What would you like to do now?</font></h1>
 
 
-	If you wish to logout :
+	<h2>If you wish to logout :</h2>
 	<a href="FrontPage.html"><button>Logout</button></a>
 	<br>
-	<br> If you wish to issue Book :
+	<br> 
+	<h2>If you wish to issue Book :</h2>
 	<a href="BookIssue.jsp"><button>Issue</button></a>
 
 
