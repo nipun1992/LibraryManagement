@@ -62,18 +62,22 @@ function validate() {
 
 	}
 
-	// var branch = NewUser.branch.selectedIndex;
+	/* var branch = NewUser.branch.selectedIndex;*/
 
-	var branch = document.getElementById("subject").selectedIndex;
+	/*
+	 * var branch = NewUser.branch.selectedIndex; // var branch =
+	 * document.getElementById("subject").value; document.write("<h1>" + sem + "</h1>");
+	 * document.write("<h1>" + branch + "</h1>");
+	 */
 
-	if (!(branch == "Computer Science"
-			|| branch == "Electronics and Communication"
-			|| branch == "Mechanical" || branch == "Electrical" || branch == "Civil")) {
-		alert('Select branch');
-		return false;
-	} else {
-
-	}
+	/*
+	 * if (!(branch == "Computer Science" || branch == "Electronics and
+	 * Communication" || branch == "Mechanical" || branch == "Electrical" ||
+	 * branch == "Civil")) {
+	 */
+	/*
+	 * if (branch == "") { alert('Select branch'); return false; }
+	 */
 
 	var gender = NewUser.r1.value;
 	if (gender == "") {

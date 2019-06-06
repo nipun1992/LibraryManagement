@@ -2,6 +2,7 @@ package com.Librarian;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,111 +46,127 @@ public class AddBook extends HttpServlet {
 
 		RequestDispatcher rd;
 
-		String sql = "SELECT * FROM LIBRARY_BOOK WHERE BOOKNAME = '" + request.getParameter("bookname") + "'";
+		String sql1 = "SELECT * FROM LIBRARY_BOOK WHERE BOOKNAME = '" + request.getParameter("bookname") + "'";
 
-		con = Jdbc.connect();
-
-		boolean fileAlreadyExists = false;
+		String sql2 = "SELECT * FROM LIBRARY_BOOK WHERE BOOKID = '" + request.getParameter("bookid") + "'";
 
 		try {
 
-			ps = con.prepareStatement(sql);
+			Jdbc.connect();
 
-			ResultSet rs = ps.executeQuery();
+			if ((Jdbc.con).isClosed()) {
+				System.out.println("connection closed");
+			} else
+				System.out.println("connection open");
 
-			if (rs.next()) {
+			ps = (Jdbc.con).prepareStatement(sql1);
 
-				String bookAlreadyExists = "The book already exists in Library. Please add another book";
-				request.setAttribute("exists", bookAlreadyExists);
+			ResultSet rs1 = ps.executeQuery();
 
-				fileAlreadyExists = true;
+			ps = (Jdbc.con).prepareStatement(sql2);
+
+			ResultSet rs2 = ps.executeQuery();
+
+			if (rs1.next()) {
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<html>");
+				out.println("<head></head>");
+				out.println("<body>");
+				out.println("<h1>A book with this name already exists in Library. Please add another book</h1>");
+				out.println("</body>");
+				out.println("</html>");
 
 				rd = request.getRequestDispatcher("AddBook.jsp");
+				rd.include(request, response);
+
+			} else if (rs2.next()) {
+				PrintWriter out = response.getWriter();
+
+				out.println("<html>");
+				out.println("<head></head>");
+				out.println("<body>");
+				out.println("<h1>A book with this id already exists in Library. Please choose another bookid</h1>");
+				out.println("</body>");
+				out.println("</html>");
+
+				rd = request.getRequestDispatcher("AddBook.jsp");
+				rd.include(request, response);
+			} else {
+				String sql = "INSERT INTO LIBRARY_BOOK VALUES(?, ?, ?, ?, ?)";
+
+				try {
+
+					ps = (Jdbc.con).prepareStatement(sql);
+
+					ps.setString(1, request.getParameter("bookid"));
+					ps.setString(2, request.getParameter("bookname"));
+					ps.setString(3, request.getParameter("streams"));
+					ps.setString(4, request.getParameter("bookauthor"));
+
+					FileInputStream fis = new FileInputStream(request.getParameter("bookfile"));
+					ps.setBinaryStream(5, fis);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				try {
+					ps.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				sql = "INSERT INTO LIBRARY_BOOK_STATUS VALUES(?, ?, ?, ?, ?)";
+
+				try {
+
+					ps = (Jdbc.con).prepareStatement(sql);
+
+					ps.setString(1, request.getParameter("bookid"));
+					ps.setString(2, "Available");
+					ps.setString(3, null);
+					ps.setDate(4, null);
+					ps.setString(5, null);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				try {
+					ps.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				rd = request.getRequestDispatcher("LibrarianLogout.jsp");
 				rd.forward(request, response);
+
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+
+			try {
+				ps.close();
+				ps = null;
+				(Jdbc.con).close();
+
+				if ((Jdbc.con).isClosed()) {
+					System.out.println("connection closed");
+				} else
+					System.out.println("connection open");
+				Jdbc.closeConnection();
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 		}
 
-		if (fileAlreadyExists == false) {
-			sql = "INSERT INTO LIBRARY_BOOK VALUES(?, ?, ?, ?, ?)";
-
-			try {
-
-				ps = con.prepareStatement(sql);
-
-				ps.setString(1, request.getParameter("bookid"));
-				ps.setString(2, request.getParameter("bookname"));
-				ps.setString(3, request.getParameter("streams"));
-				ps.setString(4, request.getParameter("bookauthor"));
-
-				FileInputStream fis = new FileInputStream(request.getParameter("bookfile"));
-				ps.setBinaryStream(5, fis);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			int rows = 0;
-
-			try {
-				rows = ps.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			if (rows != 0) {
-				System.out.println("Successful");
-			} else {
-				System.out.println("Unsuccessful");
-
-			}
-
-			rows = 0;
-
-			sql = "INSERT INTO LIBRARY_BOOK_STATUS VALUES(?, ?, ?, ?, ?)";
-
-			try {
-
-				ps = con.prepareStatement(sql);
-
-				ps.setString(1, request.getParameter("bookid"));
-				ps.setString(2, "Available");
-				ps.setString(3, null);
-				ps.setDate(4, null);
-				ps.setString(5, null);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			rows = 0;
-
-			try {
-				rows = ps.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			if (rows != 0) {
-				System.out.println("Successful");
-			} else {
-				System.out.println("Unsuccessful");
-
-			}
-
-			/*
-			 * if (ps != null) { try { ps.close(); ps = null; } catch (SQLException e) {
-			 * e.printStackTrace(); } }
-			 * 
-			 * if (con != null) { try { con.close(); con = null; } catch (SQLException e) {
-			 * e.printStackTrace(); } }
-			 */
-
-			rd = request.getRequestDispatcher("LibrarianLogout.jsp");
-			rd.forward(request, response);
-
-		}
 	}
 
 }

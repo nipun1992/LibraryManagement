@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class Jdbc {
 
-	private static Connection con;
+	public static Connection con;
 	private static FileInputStream fis;
 	private static Properties p;
 
@@ -38,30 +38,52 @@ public class Jdbc {
 
 	}
 
-	public static Connection connect() {
+	public static void connect() {
+
+		// System.out.println("Before con");
+
 		if (con == null) {
+
+			// System.out.println("Inside con");
 
 			property();
 
+			// System.out.println("After property()");
+
 			try {
-				// Class.forName("oracle.jdbc.driver.OracleDriver");
 				Class.forName(p.getProperty("driver"));
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 
 			try {
-				// con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl",
-				// "system", "system");
 				con = DriverManager.getConnection(p.getProperty("url"), p.getProperty("user"),
 						p.getProperty("password"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
+		} else {
+			System.out.println("Could not check con");
 		}
 
-		return con;
+		try {
+			fis.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		p = null;
+
+		// return con;
+	}
+
+	public static void closeConnection() throws SQLException {
+
+		con.close();
+		con = null;
+
 	}
 
 }

@@ -6,8 +6,15 @@ body {
 #image
 {
 	width: 1300;
+	height:950
 	background-color: fuchsia;
-	width:1310
+	
+}
+
+#span1
+{
+	height: 100;
+	align-content: center;	
 }
 
 img

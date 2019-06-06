@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,36 +8,21 @@
 <title>Librarian Login Page</title>
 <link href="CSSFiles/LibrarianLogin.css" rel="stylesheet">
 
-<script type="text/javascript">
-	function validateLibrarian() {
-
-		var libuser = Librarian.librarianid.value;
-
-		if (libuser != "College") {
-			alert("User id is wrong");
-			return false;
-		}
-
-		var paswrd = Librarian.librarianpassword.value;
-
-		if (paswrd != "Library") {
-			alert("Password is wrong");
-			return false;
-		}
-
-	}
-</script>
+<script src="JSFiles/LibrarianLoginValidation.js"></script>
 
 </head>
 <body>
 
-	<span id="span1" style="height: 100; align-content: center;"> <font
+	<!-- <span id="span1" style="height: 100; align-content: center;"> <font
 		size="5" face="arial"><h1 align="center" style="">Welcome,
 				Please enter credentials</h1></font>
+	</span> -->
+	<span id="span1"> <font size="5" face="arial"><h1
+				align="center">Welcome, Please enter credentials</h1></font>
 	</span>
 
 	<span id="image"> <img src="images/Librarian.jpeg" height="250"
-		align="top" border="4">
+		align="middle" style="border-color: black; border-style: groove;">
 	</span>
 	<br>
 	<br>
@@ -51,13 +37,15 @@
 		<table>
 			<tr>
 				Enter Librarian Id :
-				<input type="text" name="librarianid">
+				<input type="text" name="librarianid" placeholder="Librarian id"
+					autocomplete="off">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Enter Librarian Password :
-				<input type="password" name="librarianpassword">
+				<input type="password" name="librarianpassword"
+					placeholder="Librarian Password">
 			</tr>
 			<br>
 			<br>

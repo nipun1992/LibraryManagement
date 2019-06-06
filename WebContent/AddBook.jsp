@@ -6,54 +6,24 @@
 <meta charset="ISO-8859-1">
 <title>Add Book</title>
 
-<script type="text/javascript">
-	function bookSubmission() {
-
-		var name = NewBook.bookname.value;
-
-		if (name.trim() == "") {
-			alert('Book name not provided');
-			return false;
-		}
-
-		var bkId = NewBook.bookid.value;
-
-		if (bkId.length != 4) {
-			alert('Book Id must have 4 characters');
-			return false;
-		}
-
-	}
-</script>
+<script src="JSFiles/AddBook.js"></script>
 
 </head>
 <body bgcolor="green">
 
-	<%
-		if (request.getAttribute("exists") != null) {
-	%>
-	<h1><%=request.getAttribute("exists")%></h1>
-
-	<%
-		request.setAttribute("exists", null);
-		}
-	%>
-
 	<center>
-		<div style="background-color: maroon;">
+		<div style="background-color: maroon; height: 45px;">
 			<font color="red"
-				style="font-family: cursive; font-size: xx-large; font-style: italic; font-weight: bolder; background-color: aqua;">Add
+				style="font-family: cursive; font-size: xx-large; font-style: italic; font-weight: bolder; background-color: aqua; height: 100">Add
 				Book to the Library</font>
-
 		</div>
 
-		<span id="image"
+		<br> <span id="image"
 			style="width: 1200; background-color: olive; background-repeat: round;">
-			<img alt="" src="images/Book.jpeg" height="250" align="top"
-			border="4">
+			<img alt="" src="images/Books3.jpeg" height="250" align="top"
+			border="4" style="border-color: orange;">
 		</span>
 	</center>
-	<br>
 	<br>
 	<h4
 		style="color: purple; font-size: x-large; background-color: scrollbar;">Fields
@@ -93,21 +63,14 @@
 			<br>
 			<br>
 			<tr>
-				<br>
-				<br>
-			<tr>
 				Enter author :
 				<input type="text" name="bookauthor">
-				<br>
 			</tr>
-			<br>
-			<br>
 			<br>
 			<br>
 			<tr>
 				Insert Ebook file :
 				<input type="file" name="bookfile">
-				<br>
 			</tr>
 			<br>
 			<br>

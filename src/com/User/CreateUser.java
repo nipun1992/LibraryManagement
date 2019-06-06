@@ -79,17 +79,20 @@ public class CreateUser extends HttpServlet {
 
 		String sql = "INSERT INTO LIBRARY_USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, null, 'Y')";
 
-		con = Jdbc.connect();
-
 		try {
 
-			ps = con.prepareStatement(sql);
+			Jdbc.connect();
+
+			ps = (Jdbc.con).prepareStatement(sql);
 
 			ps.setString(1, request.getParameter("userid"));
 			ps.setString(2, request.getParameter("password"));
 			ps.setString(3, request.getParameter("fullname"));
 			ps.setInt(4, Integer.parseInt(request.getParameter("sem")));
 			ps.setString(5, request.getParameter("branch"));
+			
+			System.out.println("Hello" + request.getParameter("branch") + "Nice");
+			
 			ps.setString(6, request.getParameter("r1"));
 			ps.setInt(7, Integer.parseInt(request.getParameter("age")));
 			ps.setString(8, request.getParameter("num"));
@@ -126,21 +129,13 @@ public class CreateUser extends HttpServlet {
 
 		}
 
-/*		if (ps != null) {
-			try {
-				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		if (con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}*/
+		/*
+		 * if (ps != null) { try { ps.close(); } catch (SQLException e) {
+		 * e.printStackTrace(); } }
+		 * 
+		 * if (con != null) { try { con.close(); } catch (SQLException e) {
+		 * e.printStackTrace(); } }
+		 */
 
 		RequestDispatcher rd = request.getRequestDispatcher("AccountCreated.jsp");
 		rd.forward(request, response);

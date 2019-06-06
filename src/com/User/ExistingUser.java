@@ -38,23 +38,21 @@ public class ExistingUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String usrid = request.getParameter("id1");
 		String name = request.getParameter("name1");
 		String password = request.getParameter("paswrd1");
-
-		con = Jdbc.connect();
 
 		String sql = "SELECT * FROM LIBRARY_USER WHERE USER_ID = '" + usrid + "' AND NAME = '" + name
 				+ "' AND PASSWORD = '" + password + "'";
 
 		try {
 
+			Jdbc.connect();
+
 			RequestDispatcher rd;
 
-			Statement st = con.createStatement();
+			Statement st = (Jdbc.con).createStatement();
 
 			ResultSet rs = st.executeQuery(sql);
 
@@ -72,7 +70,7 @@ public class ExistingUser extends HttpServlet {
 
 				rd = request.getRequestDispatcher("ExistingUser.jsp");
 				rd.forward(request, response);
-				
+
 				/*
 				 * response.setContentType("text/html");
 				 * 

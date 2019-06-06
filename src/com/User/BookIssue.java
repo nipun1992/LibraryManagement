@@ -40,13 +40,15 @@ public class BookIssue extends HttpServlet {
 
 		String sql = "SELECT * FROM LIBRARY_BOOK WHERE BOOKNAME = '" + bookname + "'";
 
-		con = Jdbc.connect();
+		
 
 		RequestDispatcher rd;
 
 		try {
 
-			st = con.prepareStatement(sql);
+			Jdbc.connect();
+			
+			st = (Jdbc.con).prepareStatement(sql);
 
 			ResultSet rs = st.executeQuery();
 

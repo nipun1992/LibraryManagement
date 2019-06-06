@@ -5,15 +5,16 @@
 <title>New User</title>
 <link href="CSSFiles/cssCreateUser.css" rel="stylesheet">
 
-<script src="UserValidation.js"></script>
+<!-- <script src="UserValidation.js"></script> -->
+<script src="JSFiles/UserValidation.js"></script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 var pht = document.getElementById("img1");
 
 document.write("<img src=" + pht.src + "");
 
-</script>
+</script> -->
 
 
 
@@ -45,14 +46,14 @@ document.write("<img src=" + pht.src + "");
 			<tr>
 				Enter your Full Name* :
 				<input type="text" name="fullname" placeholder="Full Name"
-					value="<%request.getAttribute("fullname");%>">
+					value="<%request.getAttribute("fullname");%>" autocomplete="off">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Enter your UserId* :
 				<input type="text" name="userid" placeholder="User Id"
-					value="<%session.getAttribute("userid");%>">
+					value="<%session.getAttribute("userid");%>" autocomplete="off">
 				<br> (UserId must have 4 characters with at least 1 upper case
 				character)
 			</tr>
@@ -110,19 +111,21 @@ document.write("<img src=" + pht.src + "");
 			<br>
 			<tr>
 				Mobile* :
-				<input type="number" name="num" placeholder="Mobile no.">
+				<input type="number" name="num" placeholder="Mobile no."
+					autocomplete="off">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Email* :
-				<input type="email" name="eml" placeholder="Email address">
+				<input type="email" name="eml" placeholder="Email address"
+					autocomplete="off">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Photo :
-				<input id="img1"  type="file" name="im" placeholder="Photo" on>
+				<input id="img1" type="file" name="im" placeholder="Photo" on>
 
 			</tr>
 			<br>
