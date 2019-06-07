@@ -145,14 +145,6 @@ public class CreateUser extends HttpServlet {
 		try {
 			ps.close();
 			ps = null;
-			(Jdbc.con).close();
-
-			if ((Jdbc.con).isClosed()) {
-				System.out.println("connection closed");
-			} else
-				System.out.println("connection open");
-			Jdbc.closeConnection();
-
 			Jdbc.closeConnection();
 
 		} catch (SQLException e1) {

@@ -32,26 +32,29 @@
 	<br>
 	<br>
 
+	<!-- enctype="multipart/form-data" -->
+
 	<form name="NewBook" action="addbook" method="post"
 		style="background-color: aqua; color: navy;"
-		onsubmit="return bookSubmission();">
+		onsubmit="return
+		bookSubmission();">
 		<table>
 			<tr>
 				Enter Book Name* :
-				<input type="text" name="bookname">
+				<input type="text" name="bookname" autocomplete="off">
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Enter Book Id* :
-				<input type="text" name="bookid">
+				<input type="text" name="bookid" autocomplete="off">
 				<br> (Book Id must have 4 characters)
 			</tr>
 			<br>
 			<br>
 			<tr>
 				Enter Stream :
-				<input name="streams" list="stream">
+				<input name="streams" list="stream" autocomplete="off">
 				<datalist id="stream">
 					<option value="Computer Science">
 					<option value="Electronics and Communication">

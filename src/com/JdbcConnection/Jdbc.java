@@ -76,12 +76,17 @@ public class Jdbc {
 
 		p = null;
 
-		// return con;
 	}
 
 	public static void closeConnection() throws SQLException {
 
 		con.close();
+
+		if ((Jdbc.con).isClosed()) {
+			System.out.println("connection closed");
+		} else
+			System.out.println("connection open");
+
 		con = null;
 
 	}

@@ -15,7 +15,7 @@
 		<font size="7" color="#4150f4"><b><%=request.getAttribute("NoBook")%></b></font>
 	</center> --%>
 
-	<%
+	<%-- 	<%
 		if (request.getAttribute("NoBook") != null) {
 	%>
 	<h1><%=request.getAttribute("NoBook")%></h1>
@@ -23,7 +23,7 @@
 	<%
 		request.setAttribute("NoBook", null);
 		}
-	%>
+	%> --%>
 
 	<br>
 	<h1 style="color: red; size: 500px;">
@@ -36,7 +36,7 @@
 
 	<form action="issuebk" style="background-color: aqua; color: navy;">
 		<font size="6">Book Name :</font> <input name="bookname" list="books"
-			placeholder="Book Name">
+			placeholder="Book Name" autocomplete="off">
 		<datalist id="books">
 			<option value="Quantum Computer">
 			<option value="SQL">

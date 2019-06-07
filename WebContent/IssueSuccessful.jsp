@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,14 @@
 <body bgcolor="green">
 
 
-	<h1 align="center">Book is ussed successfully</h1>
+	<h1 align="center">Book is issued successfully</h1>
+
+	<br>
+	<br>
+
+	<div style="font-size: large;">
+		If you want to logout, click on : <a href="FrontPage.html">Logout</a>
+	</div>
 
 </body>
 </html>

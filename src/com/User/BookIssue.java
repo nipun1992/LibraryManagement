@@ -3,9 +3,11 @@ package com.User;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -40,14 +42,12 @@ public class BookIssue extends HttpServlet {
 
 		String sql = "SELECT * FROM LIBRARY_BOOK WHERE BOOKNAME = '" + bookname + "'";
 
-		
-
 		RequestDispatcher rd;
 
 		try {
 
 			Jdbc.connect();
-			
+
 			st = (Jdbc.con).prepareStatement(sql);
 
 			ResultSet rs = st.executeQuery();
@@ -71,7 +71,8 @@ public class BookIssue extends HttpServlet {
 
 				response.setContentType(mimeType);
 
-				String headerValue = String.format("attachment; filename=\"%s\"", filename);
+				String headerValue = String.format("attachment; filename=\"%s\"", filename + ".txt");
+
 				response.setHeader("Content-Disposition", headerValue);
 
 				OutputStream os = response.getOutputStream();
@@ -86,26 +87,50 @@ public class BookIssue extends HttpServlet {
 				is.close();
 				os.close();
 
-				request.setAttribute("NoBook", null);
+				// request.setAttribute("NoBook", null);
 
 				rd = request.getRequestDispatcher("IssueSuccessful.jsp");
-				// rd.forward(request, response);
+				rd.forward(request, response);
 
 			} else {
-				System.out.println("No such book");
+				/*
+				 * System.out.println("No such book");
+				 * 
+				 * String noBookMessage = "No such book exists in the Library";
+				 * 
+				 * request.setAttribute("NoBook", noBookMessage);
+				 */
 
-				String noBookMessage = "No such book exists in the Library";
+				PrintWriter out = response.getWriter();
 
-				request.setAttribute("NoBook", noBookMessage);
+				out.println("<html>");
+				out.println("<head></head>");
+				out.println("<body>");
+				out.println("<h1>Such a book is not available in the Library. Please choose another book</h1><br><br>");
+				out.println("</body>");
+				out.println("</html>");
 
 				rd = request.getRequestDispatcher("BookIssue.jsp");
-				rd.forward(request, response);
+				rd.include(request, response);
 
 			}
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
+		} finally {
+
+			try {
+				st.close();
+				st = null;
+
+				Jdbc.closeConnection();
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 		}
 
 	}

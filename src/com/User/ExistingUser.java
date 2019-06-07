@@ -69,9 +69,11 @@ public class ExistingUser extends HttpServlet {
 				out.println("<html>");
 				out.println("<head></head>");
 				out.println("<body>");
-				out.println("<h1>Queried user does not exist in the Library system</h1><br><br>");
+				out.println("<center><h1>Queried user does not exist in the Library system</h1></center><br><br>");
 				out.println("</body>");
 				out.println("</html>");
+
+				request.setAttribute("exist", "true");
 
 				rd = request.getRequestDispatcher("ExistingUser.jsp");
 				rd.include(request, response);
@@ -84,13 +86,14 @@ public class ExistingUser extends HttpServlet {
 
 			try {
 
-				(Jdbc.con).close();
-
-				if ((Jdbc.con).isClosed()) {
-					System.out.println("connection closed");
-				} else
-					System.out.println("connection open");
 				Jdbc.closeConnection();
+
+				/*
+				 * (Jdbc.con).close();
+				 * 
+				 * if ((Jdbc.con).isClosed()) { System.out.println("connection closed"); } else
+				 * System.out.println("connection open"); Jdbc.closeConnection();
+				 */
 
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block

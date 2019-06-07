@@ -8,7 +8,7 @@
 </head>
 <body bgcolor="aqua">
 
-	<%
+	<%-- <%
 		if (request.getAttribute("userExists") != null) {
 	%>
 	<h1><%=request.getAttribute("userExists")%></h1>
@@ -16,8 +16,11 @@
 	<%
 		request.setAttribute("exists", null);
 		}
-	%>
+	%> --%>
 
+	<%
+		if (request.getAttribute("exist") == null) {
+	%>
 	<center>
 		<h1
 			style="font-family: cursive; background-color: olive; align-content: center;">
@@ -26,6 +29,9 @@
 			</center>
 		</h1>
 	</center>
+	<%
+		}
+	%>
 	<br>
 	<br>
 
@@ -36,13 +42,13 @@
 
 	<form style="color: aqua; background-color: maroon;" action="exstusr">
 		<font size="6"> Enter you User Id* :</font> <input type="text"
-			placeholder="User Id" name="id1" autocomplete="off"> <br> <br> <font
-			size="6">Enter you Name* :</font> <input type="text"
-			placeholder="Name" name="name1" autocomplete="off"> <br> <br> <font
-			size="6">Enter you Password* :</font> <input type="password"
-			placeholder="User Id" name="paswrd1"> <br> <br> <font
-			size="6">Verify :</font> <input type="submit" placeholder="User Id"
-			name="paswrd" value="Verify">
+			placeholder="User Id" name="id1" autocomplete="off"> <br>
+		<br> <font size="6">Enter you Name* :</font> <input type="text"
+			placeholder="Name" name="name1" autocomplete="off"> <br>
+		<br> <font size="6">Enter you Password* :</font> <input
+			type="password" placeholder="User Id" name="paswrd1"> <br>
+		<br> <font size="6">Verify :</font> <input type="submit"
+			placeholder="User Id" name="paswrd" value="Verify">
 	</form>
 
 </body>

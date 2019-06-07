@@ -1,5 +1,6 @@
 package com.Librarian;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import com.JdbcConnection.Jdbc;
+import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
 
 /**
  * Servlet implementation class AddBook
@@ -105,7 +112,30 @@ public class AddBook extends HttpServlet {
 					ps.setString(3, request.getParameter("streams"));
 					ps.setString(4, request.getParameter("bookauthor"));
 
-					FileInputStream fis = new FileInputStream(request.getParameter("bookfile"));
+					FileInputStream fis = null;
+
+					/*
+					 * File f; int factSize = 1024 * 1024 * 1024; int fileSize = 1024 * 1024 * 1024;
+					 * 
+					 * String reqType = request.getContentType();
+					 * 
+					 * 
+					 * 
+					 * if (reqType.contains("multipart/form-data")) { DiskFileItemFactory df = new
+					 * DiskFileItemFactory(); df.setSizeThreshold(factSize); df.setRepository(new
+					 * File("C:\\Users\\NipunGupta\\Downloads")); ServletFileUpload upload = new
+					 * ServletFileUpload(df); upload.setSizeMax(fileSize); List l =
+					 * upload.parseRequest(request); ListIterator lit = (ListIterator)
+					 * l.listIterator();
+					 * 
+					 * FileItem fi = (FileItem) lit.next(); String name = fi.getName(); f = new
+					 * File("C:\\Users\\NipunGupta\\Downloads", name); fi.write(f);
+					 * 
+					 * fis = new FileInputStream(f); }
+					 */
+
+					fis = new FileInputStream(request.getParameter("bookfile"));
+
 					ps.setBinaryStream(5, fis);
 
 				} catch (Exception e) {
@@ -152,12 +182,7 @@ public class AddBook extends HttpServlet {
 			try {
 				ps.close();
 				ps = null;
-				(Jdbc.con).close();
-				
-				if ((Jdbc.con).isClosed()) {
-					System.out.println("connection closed");
-				} else
-					System.out.println("connection open");
+
 				Jdbc.closeConnection();
 
 			} catch (SQLException e1) {
